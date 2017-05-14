@@ -50,9 +50,7 @@ def main():
         model.load_state_dict(checkpoint['model_state_dict'])
         start_epoch = checkpoint['epoch']
     else:
-        pth_file = osp.expanduser('~/data/models/torch/vgg16-00b39a1b.pth')
-        vgg16 = torchvision.models.vgg16()
-        vgg16.load_state_dict(torch.load(pth_file))
+        vgg16 = torchvision.models.vgg16(pretrained=True)
         model.copy_params_from_vgg16(vgg16, init_upscore=False)
     if cuda:
         model = model.cuda()
